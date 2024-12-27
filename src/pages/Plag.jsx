@@ -5,8 +5,9 @@ const Plag = () => {
     const [userHandle, setUserHandle] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [cheatedContests, setCheatedContests] = useState([]);
-    const [user, setUser] = useState('')
-    const [isGenuine, setIsGenuine] = useState(null);  // State to track if the user is genuine
+    const [user, setUser] = useState('');
+    const [isGenuine, setIsGenuine] = useState(null); // State to track if the user is genuine
+    const [userNotFound, setUserNotFound] = useState(false); // State to track if the user is not found
 
     const handleInputChange = (e) => {
         setUserHandle(e.target.value);
@@ -15,16 +16,18 @@ const Plag = () => {
     const fetchUserData = async (userHandle) => {
         setIsLoading(true);
         setIsGenuine(null); // Reset the genuine status when fetching new data
+        setUserNotFound(false); // Reset the "user not found" status
+
         try {
-            if (userHandle === "")
-                return;
+            if (userHandle === "") return;
+
             // Fetch user submissions
             const response = await fetch(`https://codeforces.com/api/user.status?handle=${userHandle}`);
             const data = await response.json();
             if (data.status !== "OK") {
+                setUserNotFound(true); // Set user not found if the API response is not OK
                 throw new Error("Failed to fetch user data");
             }
-
 
             // Filter and organize submissions by contest
             const contests = data.result.reduce((acc, submission) => {
@@ -66,7 +69,7 @@ const Plag = () => {
 
             // Set the genuineness based on the number of cheated contests
             if (contestsWithNames.length === 0) {
-                setIsGenuine(true);  // No cheated contests, user is genuine
+                setIsGenuine(true); // No cheated contests, user is genuine
             } else {
                 setIsGenuine(false); // At least one cheated contest, user is not genuine
             }
@@ -82,7 +85,7 @@ const Plag = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setIsLoading(true);
-        setCheatedContests([])
+        setCheatedContests([]);
         fetchUserData(userHandle);
     };
 
@@ -116,7 +119,9 @@ const Plag = () => {
                 ) : (
                     <div className="w-full">
                         <div>
-                            {isGenuine !== null ? (
+                            {userNotFound ? (
+                                <div className="text-3xl text-center font-bold mb-8 text-gray-700">User not found</div>
+                            ) : isGenuine !== null ? (
                                 <h2
                                     className={`text-3xl text-center font-bold mb-8 ${isGenuine ? "text-green-600" : "text-red-600"
                                         }`}
@@ -125,10 +130,9 @@ const Plag = () => {
                                         ? `${user} is genuine. 😊`
                                         : `${user} has ${cheatedContests.length} Skipped Contests. 🚩`}
                                 </h2>
-                            ):(
-                                <div className="text-3xl text-center font-bold mb-8 text-gray-700">User not found</div>
-                            )}
+                            ) : null}
                         </div>
+
                         {cheatedContests.length > 0 &&
                             <div>
                                 <div className="text-xl text-center font-bold mt-12 mb-4">Skipped Contest Details</div>

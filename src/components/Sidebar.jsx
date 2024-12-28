@@ -2,10 +2,10 @@ import { Link } from "react-router-dom"
 function Sidebar() {
     return (
         // {/* <!-- Sidebar --> */ }
-        <div className="w-96 bg-gray-800 text-white flex flex-col">
-            <div className="text-4xl px-12 py-6 font-bold border-b border-gray-700">
+        <div className="w-96 bg-gray-800 text-white flex flex-col h-full">
+            <Link to='/' className="text-4xl px-12 py-6 font-bold border-b border-gray-700">
                 CP User Insights
-            </div>
+            </Link>
             <nav className="flex-grow">
                 <ul className="mx-6 mt-4 space-y-4">
                     <li >

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import DifficultyChart from "../components/DifficultyChart";
+import RecentContestPerformance from "../components/RecentContestPerformance";
 
 function ProfileDetails() {
     const { userHandle } = useParams();
@@ -8,6 +10,7 @@ function ProfileDetails() {
     const [error, setError] = useState(null);
     const [solvedCount, setSolvedCount] = useState(0);
     const [contestCount, setContestCount] = useState(0);
+    const [difficultyData, setDifficultyData] = useState({});
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,11 +32,19 @@ function ProfileDetails() {
                 const submissions = (await submissionsResponse.json()).result;
 
                 // Calculate unique problems solved
-                const solvedProblems = new Set(
-                    submissions
-                        .filter((sub) => sub.verdict === "OK") // Ignore practice/gym contests
-                        .map((sub) => `${sub.problem.contestId}-${sub.problem.index}`) // Combine contestId and index to avoid duplicates
-                );
+                const solvedProblems = new Set();
+                const difficultyMap = {};
+
+                submissions.forEach((sub) => {
+                    if (sub.verdict === "OK") {
+                        const problemId = `${sub.problem.contestId}-${sub.problem.index}`;
+                        solvedProblems.add(problemId);
+
+                        const difficulty = sub.problem.rating || 1000;
+                        // HERE I HAVE ASSUMED DEFAULT RATING 1000 
+                        difficultyMap[difficulty] = (difficultyMap[difficulty] || 0) + 1;
+                    }
+                });
 
                 // console.log(solvedProblems.size)
                 // Calculate total contests based on participant type
@@ -45,6 +56,7 @@ function ProfileDetails() {
 
                 setContestCount(uniqueContests.size);
                 setSolvedCount(solvedProblems.size);
+                setDifficultyData(difficultyMap);
                 setUserInfo(userData);
             } catch (err) {
                 setError(err.message);
@@ -65,6 +77,7 @@ function ProfileDetails() {
     }
 
     const getRankColor = (rating) => {
+        if(rating >= 4000) return "#000000" // ONLY FOR TOURIST 😂
         if (rating >= 3000) return "#CC0000"; // Legendary Grandmaster
         if (rating >= 2600) return "#FF0000"; // International Grandmaster
         if (rating >= 2400) return "#FF0000"; // Grandmaster
@@ -84,7 +97,7 @@ function ProfileDetails() {
                     <img src={userInfo.titlePhoto} className="w-full max-w-[28rem] px-4 pt-12" alt="Profile_Img" />
                     <h1 style={{ color: getRankColor(userInfo.rating) }} className="text-[2rem] text-center font-bold pb-6">{userInfo.handle}</h1>
                 </div>
-                <div className="py-8 px-12 w-2/3 bg-white">
+                <div className="p-12 w-2/3 bg-white">
                     <h1 className="text-3xl m-2 font-semibold">Rank: {userInfo.rank ?
                         (<span style={{ color: getRankColor(userInfo.rating) }}>{userInfo.rank.charAt(0).toUpperCase() +
                             userInfo.rank.slice(1)}</span>) : (<span>Unrated</span>)}
@@ -104,7 +117,7 @@ function ProfileDetails() {
                     <h1 className="text-3xl m-2 font-semibold ">Registration Date: <span className="text-gray-600">{(new Date(userInfo.registrationTimeSeconds * 1000)).toLocaleDateString()}</span></h1>
 
                     <div className="text-3xl m-2 font-semibold">Friends of: <span className="text-gray-600">{userInfo.friendOfCount} users</span></div>
-                    <h1 className="text-3xl m-2 font-semibold ">Contributions: <span className="text-gray-600">{userInfo.contributions ? (<span>{userInfo.contributions}</span>) : (<span>0</span>)}</span></h1>
+                    <h1 className="text-3xl m-2 font-semibold ">Contributions: <span className="text-gray-600">{userInfo.contribution ? (<span>{userInfo.contribution}</span>) : (<span>0</span>)}</span></h1>
 
                     <div className="my-4 flex flex-wrap gap-4">
                         <div className="p-4 border rounded-lg shadow-md w-fit flex items-center">
@@ -118,6 +131,12 @@ function ProfileDetails() {
                     </div>
                 </div>
 
+            </div>
+            <div>
+                <DifficultyChart difficultyData={difficultyData}/>
+            </div>
+            <div>
+                <RecentContestPerformance userHandle={userHandle}/>
             </div>
         </div>
     )

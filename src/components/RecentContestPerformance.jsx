@@ -16,7 +16,7 @@ function RecentContestPerformance({ userHandle }) {
                 const contestData = (await contestResponse.json()).result;
 
                 // Only get the most recent 5 contests and reverse them for chronological order
-                const recentContests = contestData.reverse().slice(0, 5).map(contest => ({
+                const recentContests = contestData.reverse().slice(0, 6).map(contest => ({
                     contestName: contest.contestName,
                     ratingChange: contest.newRating - contest.oldRating,
                     rating: contest.newRating, // Customize as needed

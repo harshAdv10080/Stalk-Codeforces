@@ -5,7 +5,6 @@ import Plag from './pages/Plag'
 import Profile from './pages/Profile'
 import Stats from './pages/Stats'
 import ProfileDetails from './pages/ProfileDetails'
-import FriendsPage from './pages/FriendsPage'
 function App() {
   return (
     // <div>

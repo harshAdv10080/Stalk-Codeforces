@@ -3,8 +3,9 @@ import Sidebar from './components/Sidebar'
 import Home from './pages/Home'
 import Plag from './pages/Plag'
 import Profile from './pages/Profile'
-import Stats from './pages/Stats'
 import ProfileDetails from './pages/ProfileDetails'
+import Problem from './pages/Problem'
+import ProblemDetails from './pages/ProblemDetails'
 function App() {
   return (
     // <div>
@@ -22,7 +23,8 @@ function App() {
           <Route path='/plag' element={<Plag />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/profile/:userHandle' element={<ProfileDetails/>}/>
-          <Route path='/stats' element={<Stats />} />
+          <Route path='/problems' element={<Problem />} />
+          <Route path='/problems/:userHandle' element={<ProblemDetails/>}/>
         </Routes>
       </div>
     </div>

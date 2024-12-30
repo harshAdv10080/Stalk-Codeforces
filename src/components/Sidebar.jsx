@@ -4,7 +4,7 @@ function Sidebar() {
         // {/* <!-- Sidebar --> */ }
         <div className="w-96 bg-gray-800 text-white flex flex-col h-full">
             <Link to='/' className="text-4xl px-12 py-6 font-bold border-b border-gray-700">
-                CP User Insights
+                CF User Insights
             </Link>
             <nav className="flex-grow">
                 <ul className="mx-6 mt-4 space-y-4">
@@ -18,7 +18,7 @@ function Sidebar() {
                         <Link to='/profile' className="block py-4 px-8 text-xl rounded-md hover:bg-gray-700" >PROFILE OVERVIEW</Link>
                     </li>
                     <li>
-                        <Link to='/stats' className="block py-4 px-8 text-xl rounded-md hover:bg-gray-700" >RECENT STATS</Link>
+                        <Link to='/problems' className="block py-4 px-8 text-xl rounded-md hover:bg-gray-700" >PROBLEM INSIGHTS</Link>
                     </li>
                 </ul>
             </nav>

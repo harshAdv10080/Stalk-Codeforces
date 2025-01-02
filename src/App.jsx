@@ -29,7 +29,7 @@ function App() {
           {/* Footer */}
           <footer className="py-8 bg-gray-800 mt-auto">
             <div className="container mx-auto text-center text-white">
-              <p>&copy; {new Date().getFullYear()} CF User Insights. Built for competitive programmers.</p>
+              <p>Made By Nihal Rawat with ❤️ and ☕.</p>
             </div>
           </footer>
         </div>

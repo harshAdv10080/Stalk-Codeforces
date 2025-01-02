@@ -1,43 +1,54 @@
 import { Link, useLocation } from "react-router-dom";
 
 function Sidebar() {
-    const location = useLocation(); // Get the current route
+    const location = useLocation();
 
     return (
-        <div className="w-96 bg-gray-800 text-white flex flex-col h-full">
-            <Link to='/' className="text-4xl px-12 py-6 font-bold border-b border-gray-700">
+        <div className="bg-gray-800 text-white lg:w-96 lg:h-full sm:flex lg:flex-col flex px-16 h-fit items-center justify-between lg:px-0 py-6">
+            <Link
+                to="/"
+                className="text-lg lg:text-4xl font-bold lg:px-12 lg:py-6 border-b border-gray-700 lg:border-none"
+            >
                 CF User Insights
             </Link>
-            <nav className="flex-grow">
-                <ul className="mx-6 mt-4 space-y-4">
+            <nav className="lg:flex-grow">
+                <ul className="lg:mx-6 lg:mt-4 lg:space-y-4 flex space-x-4 lg:flex-col sm:flex-row flex-col lg:space-x-0 ">
                     <li>
                         <Link
-                            to='/'
-                            className={`block py-4 px-8 text-xl rounded-md ${location.pathname === '/' ? 'bg-gray-700' : 'hover:bg-gray-700'}`}
+                            to="/"
+                            className={`hidden sm:block py-2 px-4 lg:py-4 lg:px-8 text-sm lg:text-xl rounded-md ${
+                                location.pathname === "/" ? "bg-gray-700" : "hover:bg-gray-700"
+                            }`}
                         >
                             HOME
                         </Link>
                     </li>
                     <li>
                         <Link
-                            to='/plag'
-                            className={`block py-4 px-8 text-xl rounded-md ${location.pathname === '/plag' ? 'bg-gray-700' : 'hover:bg-gray-700'}`}
+                            to="/plag"
+                            className={`block py-2 px-4 lg:py-4 lg:px-8 text-sm lg:text-xl rounded-md ${
+                                location.pathname === "/plag" ? "bg-gray-700" : "hover:bg-gray-700"
+                            }`}
                         >
                             PLAG DETECTION
                         </Link>
                     </li>
                     <li>
                         <Link
-                            to='/profile'
-                            className={`block py-4 px-8 text-xl rounded-md ${location.pathname === '/profile' ? 'bg-gray-700' : 'hover:bg-gray-700'}`}
+                            to="/profile"
+                            className={`block py-2 px-4 lg:py-4 lg:px-8 text-sm lg:text-xl rounded-md ${
+                                location.pathname === "/profile" ? "bg-gray-700" : "hover:bg-gray-700"
+                            }`}
                         >
                             PROFILE OVERVIEW
                         </Link>
                     </li>
                     <li>
                         <Link
-                            to='/problems'
-                            className={`block py-4 px-8 text-xl rounded-md ${location.pathname === '/problems' ? 'bg-gray-700' : 'hover:bg-gray-700'}`}
+                            to="/problems"
+                            className={`block py-2 px-4 lg:py-4 lg:px-8 text-sm lg:text-xl rounded-md ${
+                                location.pathname === "/problems" ? "bg-gray-700" : "hover:bg-gray-700"
+                            }`}
                         >
                             PROBLEM INSIGHTS
                         </Link>

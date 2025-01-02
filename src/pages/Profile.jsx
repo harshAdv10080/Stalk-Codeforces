@@ -11,7 +11,7 @@ const Profile = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(userHandle.trim() !== ''){
+        if (userHandle.trim() !== '') {
             navigate(`/profile/${userHandle}`);
         }
     };
@@ -39,6 +39,7 @@ const Profile = () => {
                     Submit
                 </button>
             </form>
+            
         </div>
     );
 };

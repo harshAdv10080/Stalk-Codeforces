@@ -110,109 +110,110 @@ const ProblemDetails = () => {
     if (loading) {
         return (
             <div className="h-screen flex items-center justify-center">
-                <Loader/>
+                <Loader />
             </div>
         );
     }
 
     return (
-        <div>
-            <div className="bg-white">
-                <h1 className="text-[2.5rem] font-bold text-center mb-2 p-6">
-                    Questions Solved by{" "}
-                    <span className="text-[#2d3e55]">{userHandle}</span>
-                </h1>
 
-                <div className="flex flex-col gap-6 flex-wrap justify-center items-center mb-6">
-                    <div className="flex gap-10 flex-wrap justify-center items-center">
-                        <div className="flex flex-col">
-                            <label className="text-xl font-semibold text-gray-700 ml-2">
-                                Filter by Difficulty:
-                            </label>
-                            <input
-                                type="number"
-                                placeholder="Enter Difficulty (Ex - 1200)"
-                                className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                value={difficulty}
-                                onChange={(e) => setDifficulty(e.target.value)}
-                            />
-                        </div>
-                        <div className="flex flex-col">
-                            <label className="text-xl font-semibold text-gray-700 ml-2">
-                                Filter by Tag:
-                            </label>
-                            <input
-                                type="text"
-                                placeholder="Enter Tag (Ex - dp)"
-                                className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                value={tag}
-                                onChange={(e) => setTag(e.target.value)}
-                            />
-                        </div>
+        <div className="bg-white min-h-screen">
+            <h1 className="text-[2.5rem] font-bold text-center mb-2 p-6">
+                Questions Solved by{" "}
+                <span className="text-[#2d3e55]">{userHandle}</span>
+            </h1>
+
+            <div className="flex flex-col gap-6 flex-wrap justify-center items-center mb-6">
+                <div className="flex gap-10 flex-wrap justify-center items-center">
+                    <div className="flex flex-col">
+                        <label className="text-xl font-semibold text-gray-700 ml-2">
+                            Filter by Difficulty:
+                        </label>
+                        <input
+                            type="number"
+                            placeholder="Enter Difficulty (Ex - 1200)"
+                            className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            value={difficulty}
+                            onChange={(e) => setDifficulty(e.target.value)}
+                        />
                     </div>
-                    <button
-                        className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
-                        onClick={handleFilter}
-                    >
-                        Apply Filters
-                    </button>
+                    <div className="flex flex-col">
+                        <label className="text-xl font-semibold text-gray-700 ml-2">
+                            Filter by Tag:
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Enter Tag (Ex - dp)"
+                            className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            value={tag}
+                            onChange={(e) => setTag(e.target.value)}
+                        />
+                    </div>
                 </div>
-
-                <div className="bg-white shadow-md rounded-md px-6">
-                    {filteredQuestions.length > 0 ? (
-                        <>
-                            <h1 className="text-2xl mb-8 p-2">Problems : <span className="font-bold">{filteredQuestions.length}</span></h1>
-                            <ul className="space-y-4 pb-8">
-                                {filteredQuestions.map((question) => (
-                                    <li
-                                        key={`${question.contestId}-${question.index}`}
-                                        className="border p-4 rounded-md hover:shadow-lg transition"
-                                    >
-                                        <a
-                                            href={`https://codeforces.com/contest/${question.contestId}/problem/${question.index}`}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            <h3
-                                                className="text-lg font-bold text-gray-800"
-                                                onMouseEnter={(e) => (e.target.style.color = getColor(question.difficulty))}
-                                                onMouseLeave={(e) => (e.target.style.color = "black")}>
-                                                {question.name}
-                                            </h3>
-                                        </a>
-                                        <div className="flex justify-between">
-                                            <p className="text-sm text-gray-600">
-                                                Difficulty:{" "}
-                                                <span className="font-medium text-blue-500">
-                                                    {question.difficulty}
-                                                </span>
-                                            </p>
-                                            <p className="text-sm text-gray-600">
-                                                Tags:{" "}
-                                                <span className="font-medium text-green-500">
-                                                    {question.tags.join(", ")}
-                                                </span>
-                                            </p>
-                                            <p className="text-sm">
-                                                Submitted On:{" "}
-                                                <span className="text-purple-600">
-                                                    {question.date}
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-                        </>
-                    ) : (
-                        <p className="text-gray-600 text-center py-4">
-                            No question match the filters.
-                        </p>
-
-                    )}
-                </div>
+                <button
+                    className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
+                    onClick={handleFilter}
+                >
+                    Apply Filters
+                </button>
             </div>
+
+            <div className="bg-white shadow-md rounded-md px-6">
+                {filteredQuestions.length > 0 ? (
+                    <>
+                        <h1 className="text-2xl mb-8 p-2">Problems : <span className="font-bold">{filteredQuestions.length}</span></h1>
+                        <ul className="space-y-4 pb-8">
+                            {filteredQuestions.map((question) => (
+                                <li
+                                    key={`${question.contestId}-${question.index}`}
+                                    className="border p-4 rounded-md hover:shadow-lg transition"
+                                >
+                                    <a
+                                        href={`https://codeforces.com/contest/${question.contestId}/problem/${question.index}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <h3
+                                            className="text-lg font-bold text-gray-800"
+                                            onMouseEnter={(e) => (e.target.style.color = getColor(question.difficulty))}
+                                            onMouseLeave={(e) => (e.target.style.color = "black")}>
+                                            {question.name}
+                                        </h3>
+                                    </a>
+                                    <div className="flex justify-between">
+                                        <p className="text-sm text-gray-600">
+                                            Difficulty:{" "}
+                                            <span className="font-medium text-blue-500">
+                                                {question.difficulty}
+                                            </span>
+                                        </p>
+                                        <p className="text-sm text-gray-600">
+                                            Tags:{" "}
+                                            <span className="font-medium text-green-500">
+                                                {question.tags.join(", ")}
+                                            </span>
+                                        </p>
+                                        <p className="text-sm">
+                                            Submitted On:{" "}
+                                            <span className="text-purple-600">
+                                                {question.date}
+                                            </span>
+                                        </p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </>
+                ) : (
+                    <p className="text-gray-600 text-center py-4">
+                        No question match the filters.
+                    </p>
+
+                )}
+            </div>
+            
         </div>
+
     );
 };
 

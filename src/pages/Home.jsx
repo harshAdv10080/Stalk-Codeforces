@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen text-gray-800 bg-white flex flex-col justify-between">
+    <div className="min-h-screen text-gray-800 bg-white">
       {/* Hero Section */}
       <section className="py-16 text-center">
         <div className="container mx-auto px-6">
@@ -44,12 +44,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 bg-gray-800">
-        <div className="container mx-auto text-center text-white">
-          <p>&copy; {new Date().getFullYear()} CF User Insights. Built for competitive programmers.</p>
-        </div>
-      </footer>
     </div>
   );
 };

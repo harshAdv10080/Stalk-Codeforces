@@ -140,7 +140,7 @@ const Plag = () => {
                                         <tr className="bg-gray-100">
                                             <th className="border border-gray-300 px-4 py-2 text-left">Contest ID</th>
                                             <th className="border border-gray-300 px-4 py-2 text-left">Contest Name</th>
-                                            <th className="border border-gray-300 px-4 py-2 text-left">Skipped Questions</th>
+                                            <th className="border border-gray-300 px-4 py-2 text-left sm:block hidden">Skipped Questions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -156,7 +156,7 @@ const Plag = () => {
                                                         {contest.name}
                                                     </a>
                                                 </td>
-                                                <td className="border border-gray-300 px-4 py-4">{contest.skippedProblems}</td>
+                                                <td className="border border-gray-300 px-4 py-4 sm:block hidden">{contest.skippedProblems}</td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -167,6 +167,7 @@ const Plag = () => {
                     </div>
                 )}
             </div>
+            
         </div>
     );
 };

@@ -95,46 +95,49 @@ function ProfileDetails() {
 
     return (
         <div>
-            <div className="w-full flex h-fit">
-                <div className="profile-photu bg-white w-1/3 flex flex-col items-center">
+            <div className="w-full sm:flex h-fit">
+                {/* Profile Picture Section */}
+                <div className="profile-photo bg-white sm:flex sm:flex-col sm:items-center sm:w-1/3 flex flex-col items-center">
                     <img src={userInfo.titlePhoto} className="w-full max-w-[28rem] px-4 pt-12" alt="Profile_Img" />
-                    <h1 style={{ color: getRankColor(userInfo.rating) }} className="text-[2rem] text-center font-bold pb-6">{userInfo.handle}</h1>
+                    <h1 style={{ color: getRankColor(userInfo.rating) }} className="text-3xl text-center font-bold pb-6">{userInfo.handle}</h1>
                 </div>
-                <div className="p-12 w-2/3 bg-white">
+
+                {/* Profile Details Section */}
+                <div className="p-12 sm:w-full sm:px-4 bg-white">
                     <h1 className="text-3xl m-2 font-semibold">Rank: {userInfo.rank ?
-                        (<span style={{ color: getRankColor(userInfo.rating) }}>{userInfo.rank.charAt(0).toUpperCase() +
-                            userInfo.rank.slice(1)}</span>) : (<span>Unrated</span>)}
+                        (<span style={{ color: getRankColor(userInfo.rating) }}>{userInfo.rank.charAt(0).toUpperCase() + userInfo.rank.slice(1)}</span>) :
+                        (<span>Unrated</span>)}
                     </h1>
                     <h1 className="text-3xl m-2 font-semibold">Current Rating: {userInfo.rating ?
                         (<span style={{ color: getRankColor(userInfo.rating) }}>{userInfo.rating}</span>) :
                         (<span>Unrated</span>)}
                     </h1>
                     <h1 className="text-3xl m-2 font-semibold">Max Rank: {userInfo.maxRank ?
-                        (<span style={{ color: getRankColor(userInfo.maxRating) }}>{userInfo.maxRank.charAt(0).toUpperCase() +
-                            userInfo.maxRank.slice(1)}</span>) :
+                        (<span style={{ color: getRankColor(userInfo.maxRating) }}>{userInfo.maxRank.charAt(0).toUpperCase() + userInfo.maxRank.slice(1)}</span>) :
                         (<span>N/A</span>)}</h1>
                     <h1 className="text-3xl m-2 font-semibold">Max Rating: {userInfo.maxRating ?
-                        (<span style={{ color: getRankColor(userInfo.maxRating) }}>
-                            {userInfo.maxRating}</span>) : (<span>N/A</span>)}
+                        (<span style={{ color: getRankColor(userInfo.maxRating) }}>{userInfo.maxRating}</span>) : (<span>N/A</span>)}
                     </h1>
-                    <h1 className="text-3xl m-2 font-semibold ">Registration Date: <span className="text-gray-600">{(new Date(userInfo.registrationTimeSeconds * 1000)).toLocaleDateString()}</span></h1>
+                    <h1 className="text-3xl m-2 font-semibold">Registration Date: <span className="text-gray-600">{(new Date(userInfo.registrationTimeSeconds * 1000)).toLocaleDateString()}</span></h1>
 
                     <div className="text-3xl m-2 font-semibold">Friends of: <span className="text-gray-600">{userInfo.friendOfCount} users</span></div>
-                    <h1 className="text-3xl m-2 font-semibold ">Contributions: <span className="text-gray-600">{userInfo.contribution ? (<span>{userInfo.contribution}</span>) : (<span>0</span>)}</span></h1>
+                    <h1 className="text-3xl m-2 font-semibold">Contributions: <span className="text-gray-600">{userInfo.contribution ? (<span>{userInfo.contribution}</span>) : (<span>0</span>)}</span></h1>
 
+                    {/* Stats Section */}
                     <div className="my-4 flex flex-wrap gap-4">
                         <div className="p-4 border rounded-lg shadow-md w-fit flex items-center">
                             <span className="text-gray-600 text-2xl mr-4">Problems Solved</span>
                             <span className="text-3xl font-bold">{solvedCount}</span>
                         </div>
                         <div className="p-4 border rounded-lg shadow-md w-fit flex items-center">
-                            <span className="text-gray-600 text-2xl mr-4 ">Contests Joined</span>
+                            <span className="text-gray-600 text-2xl mr-4">Contests Joined</span>
                             <span className="text-3xl font-bold">{contestCount}</span>
                         </div>
                     </div>
                 </div>
-
             </div>
+
+
             <div>
                 <DifficultyChart difficultyData={difficultyData} />
             </div>

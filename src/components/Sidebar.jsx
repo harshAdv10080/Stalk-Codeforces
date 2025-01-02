@@ -1,11 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 import Logo from "../../public/logo.jpg"
-
 function Sidebar() {
     const location = useLocation();
 
     return (
-        <div className="bg-gray-800 text-white lg:w-96 lg:h-full sm:flex lg:flex-col flex sm:px-10 px-6 h-fit items-center justify-between lg:px-0 py-6">
+        <div id="body1" className="bg-gray-800 text-white lg:w-96 lg:h-full sm:flex lg:flex-col flex sm:px-10 px-6 h-fit items-center justify-between lg:px-0 py-6">
             <Link
                 to="/"
                 className="text-lg lg:text-4xl font-bold lg:py-6 border-b border-gray-700 lg:border-none flex items-center gap-2"

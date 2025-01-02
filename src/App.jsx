@@ -12,12 +12,12 @@ function App() {
     <>
       <div className="lg:flex bg-gray-100">
         {/* Sidebar/Navbar */}
-        <div className="lg:flex-shrink-0 overflow-x-scroll">
+        <div className="lg:flex-shrink-0">
           <Sidebar />
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-6 overflow-y-scroll">
+        <div className="flex-1 p-6">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/plag" element={<Plag />} />

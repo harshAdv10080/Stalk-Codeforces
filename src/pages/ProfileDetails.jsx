@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import DifficultyChart from "../components/DifficultyChart";
 import RecentContestPerformance from "../components/RecentContestPerformance";
+import Loader from "../components/Loader/Loader";
 
 function ProfileDetails() {
     const { userHandle } = useParams();
@@ -69,7 +70,9 @@ function ProfileDetails() {
     }, [userHandle]);
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div className="h-screen flex items-center justify-center">
+            <Loader />
+        </div>
     }
 
     if (error) {
@@ -77,7 +80,7 @@ function ProfileDetails() {
     }
 
     const getRankColor = (rating) => {
-        if(rating >= 4000) return "#000000" // ONLY FOR TOURIST 😂
+        if (rating >= 4000) return "#000000" // ONLY FOR TOURIST 😂
         if (rating >= 3000) return "#CC0000"; // Legendary Grandmaster
         if (rating >= 2600) return "#FF0000"; // International Grandmaster
         if (rating >= 2400) return "#FF0000"; // Grandmaster
@@ -133,10 +136,10 @@ function ProfileDetails() {
 
             </div>
             <div>
-                <DifficultyChart difficultyData={difficultyData}/>
+                <DifficultyChart difficultyData={difficultyData} />
             </div>
             <div>
-                <RecentContestPerformance userHandle={userHandle}/>
+                <RecentContestPerformance userHandle={userHandle} />
             </div>
         </div>
     )

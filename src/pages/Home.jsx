@@ -1,61 +1,57 @@
+// Import necessary dependencies
+// import React from 'react';
 
-const Home = () => {
-    return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <h1 className="text-4xl font-extrabold text-center mb-8">
-                Welcome to CF User Insights!
-            </h1>
-            <p className="text-lg text-center mb-12">
-                CF User Insights is a powerful tool designed for Codeforces users to analyze and track their competitive programming activity. Whether you're a seasoned programmer or just starting out, our platform offers valuable insights into your Codeforces profile, contest performance, and progress.
-            </p>
+import { Link } from "react-router-dom";
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-                <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-md">
-                    <h2 className="text-2xl font-semibold mb-4">1. Plagiarism Detection</h2>
-                    <p className="text-lg text-center mb-4">
-                        Quickly identify contests where a user has skipped all problems, potentially indicating plagiarism. This feature helps you spot suspicious behavior and ensure the integrity of Codeforces contests.
-                    </p>
-                    <p className="text-md text-center text-gray-600">
-                        - Identify contests with suspicious behavior.<br />
-                        - Analyze user submissions and skipped questions.<br />
-                        - Improve transparency in competitive programming.
-                    </p>
-                </div>
-
-                <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-md">
-                    <h2 className="text-2xl font-semibold mb-4">2. Profile Overview</h2>
-                    <p className="text-lg text-center mb-4">
-                        View detailed information about any Codeforces user, including their solved problems, contest participation, ranking history, and performance statistics. This feature provides a comprehensive view of your competitive programming journey.
-                    </p>
-                    <p className="text-md text-center text-gray-600">
-                        - View solved problems and contest performance.<br />
-                        - Track user ranking and improvements over time.<br />
-                        - Get a complete overview of a Codeforces profile.
-                    </p>
-                </div>
-
-                <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-md">
-                    <h2 className="text-2xl font-semibold mb-4">3. Recent Stats and History</h2>
-                    <p className="text-lg text-center mb-4">
-                        Analyze recent contests and questions solved within a defined time range. This feature helps users keep track of their progress and pinpoint areas for improvement, making it easier to monitor and refine their coding skills.
-                    </p>
-                    <p className="text-md text-center text-gray-600">
-                        - Track recent questions solved.<br />
-                        - Filter and analyze contests based on specific time frames.<br />
-                        - Monitor your coding progress and identify growth areas.
-                    </p>
-                </div>
-            </div>
-
-            <div className="mt-12 text-center">
-                <h3 className="text-xl font-semibold mb-4">Start exploring your Codeforces journey now!</h3>
-                <p className="text-lg">
-                    With CF User Insights, you can easily track your performance, monitor your progress, and ensure the integrity of your Codeforces contests. Dive into your data today and enhance your competitive programming experience.
-                </p>
-            </div>
+const HomePage = () => {
+  return (
+    <div className="min-h-screen text-gray-800 bg-white flex flex-col justify-between">
+      {/* Hero Section */}
+      <section className="py-16 text-center">
+        <div className="container mx-auto px-6">
+          <h2 className="text-5xl font-extrabold mb-6">Welcome to CF User Insights</h2>
+          <p className="text-xl mb-8">Analyze Codeforces profiles, detect plagiarisms, and uncover insightful trends effortlessly.</p>
+          <a href="#features" className="px-6 py-3 rounded-full font-semibold bg-blue-600 text-white hover:bg-blue-700 transition">Explore Features</a>
         </div>
-    );
+        <hr className="border-gray-300 mt-16" />
+      </section>
+      
+
+      {/* Features Section */}
+      <section id="features" className="py-12 pt-0">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center mb-12">Key Features</h2>
+          <div className="grid md:grid-cols-3 gap-10">
+            {/* Feature 1 */}
+            <div id="plagiarism-check" className="shadow-lg rounded-lg p-8 text-center border border-gray-300">
+              <h3 className="text-2xl font-bold mb-4">Plagiarism Checker</h3>
+              <p>Detect if a user has been flagged for plagiarism and get detailed information about their flagged submissions.</p>
+              <Link to="/plag" className="mt-6 inline-block px-5 py-3 rounded bg-blue-500 text-white hover:bg-blue-600 transition">Learn More</Link>
+            </div>
+            {/* Feature 2 */}
+            <div id="profile-overview" className="shadow-lg rounded-lg p-8 text-center border border-gray-300">
+              <h3 className="text-2xl font-bold mb-4">Profile Overview</h3>
+              <p>Visualize user statistics including question difficulty ratings, solved problems, and recent contest performances.</p>
+              <Link to="/profile" className="mt-6 inline-block px-5 py-3 rounded bg-blue-500 text-white hover:bg-blue-600 transition">Learn More</Link>
+            </div>
+            {/* Feature 3 */}
+            <div id="problem-insights" className="shadow-lg rounded-lg p-8 text-center border border-gray-300">
+              <h3 className="text-2xl font-bold mb-4">Problem Insights</h3>
+              <p>Filter solved problems based on difficulty levels and tags to identify patterns and improve your preparation strategy.</p>
+              <Link to="/problems" className="mt-6 inline-block px-5 py-3 rounded bg-blue-500 text-white hover:bg-blue-600 transition">Learn More</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 bg-gray-800">
+        <div className="container mx-auto text-center text-white">
+          <p>&copy; {new Date().getFullYear()} CF User Insights. Built for competitive programmers.</p>
+        </div>
+      </footer>
+    </div>
+  );
 };
 
-
-export default Home
+export default HomePage;

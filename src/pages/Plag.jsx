@@ -1,3 +1,4 @@
+// Import necessary dependencies
 import { useState } from "react";
 import Loader from "../components/Loader/Loader";
 
@@ -90,24 +91,22 @@ const Plag = () => {
     };
 
     return (
-        <div>
-            <h1 className="text-4xl font-bold mb-8">Plag Detection</h1>
-            <form onSubmit={handleSubmit} className="mb-4 flex flex-col items-center">
-                <label htmlFor="user-handle" className="block text-2xl font-medium mb-4">
-                    Enter Codeforces User Handle:
-                </label>
+        <div className="p-8 bg-white min-h-screen">
+            <h1 className="h-fit text-5xl font-extrabold text-center mb-10 text-gray-700">Plagiarism Detection</h1>
+            <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-4 mb-8">
+                <label htmlFor="user-handle" className="block text-xl font-medium">Enter Codeforces User Handle:</label>
 
                 <input
                     type="text"
                     id="user-handle"
                     value={userHandle}
                     onChange={handleInputChange}
-                    className="w-[80%] text-center pl-4 pr-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-[80%] max-w-md text-center px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Example - NihalRawat"
                 />
                 <button
                     type="submit"
-                    className="mt-4 px-4 py-2 bg-[#394aa8] text-white rounded-md hover:bg-blue-700"
+                    className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition-transform transform hover:scale-105"
                 >
                     Submit
                 </button>
@@ -147,7 +146,7 @@ const Plag = () => {
                                     <tbody>
                                         {cheatedContests.map((contest) => (
                                             <tr key={contest.contestId}>
-                                                <td className="border border-gray-300 px-4 py-4 ">
+                                                <td className="border border-gray-300 px-4 py-4">
                                                     <a className="font-semibold hover:text-blue-600" href={`https://codeforces.com/submissions/${user}/contest/${contest.contestId}`} target="_blank" rel="noopener noreferrer">
                                                         {contest.contestId}
                                                     </a>

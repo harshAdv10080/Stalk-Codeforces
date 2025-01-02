@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Loader from "../components/Loader/Loader";
 
 const ProblemDetails = () => {
     const { userHandle } = useParams();
@@ -108,8 +109,8 @@ const ProblemDetails = () => {
 
     if (loading) {
         return (
-            <div>
-                <span className="text-4xl font-bold">Loading...</span>
+            <div className="h-screen flex items-center justify-center">
+                <Loader/>
             </div>
         );
     }

@@ -1,23 +1,28 @@
 import { Link, useLocation } from "react-router-dom";
-import Logo from "../../public/logo.jpg"
+import Logo from "../../public/logo.jpg";
+
 function Sidebar() {
     const location = useLocation();
 
     return (
-        <div id="body1" className="bg-gray-800 text-white lg:w-96 lg:h-full sm:flex lg:flex-col flex sm:px-10 px-6 h-fit items-center justify-between lg:px-0 py-6">
+        <div className="bg-gray-800 text-white lg:w-80 w-full lg:h-screen h-fit flex flex-col items-center lg:items-start px-6 py-6 gap-8">
+            
+            {/* Logo + Title */}
             <Link
                 to="/"
-                className="text-lg lg:text-4xl font-bold lg:py-6 border-b border-gray-700 lg:border-none flex items-center gap-2"
+                className="flex items-center gap-3 text-2xl font-bold"
             >
-                <img className="h-12" src={Logo} alt="" />
-                <span>CF User Insights</span>
+                <img className="h-10 w-10 rounded-full" src={Logo} alt="Logo" />
+                <span>CF Stalker</span>
             </Link>
-            <nav className="lg:flex-grow">
-                <ul className="lg:mx-6 lg:mt-4 lg:space-y-4 flex space-x-4 lg:flex-col sm:flex-row flex-col lg:space-x-0 ">
+
+            {/* Navigation Links */}
+            <nav className="w-full">
+                <ul className="flex flex-col gap-3 w-full">
                     <li>
                         <Link
                             to="/"
-                            className={`hidden sm:block py-2 px-4 lg:py-4 lg:px-8 text-sm lg:text-xl rounded-md ${
+                            className={`block py-3 px-4 rounded-md text-base font-medium ${
                                 location.pathname === "/" ? "bg-gray-700" : "hover:bg-gray-700"
                             }`}
                         >
@@ -27,7 +32,7 @@ function Sidebar() {
                     <li>
                         <Link
                             to="/plag"
-                            className={`block py-2 px-4 lg:py-4 lg:px-8 text-sm lg:text-xl rounded-md ${
+                            className={`block py-3 px-4 rounded-md text-base font-medium ${
                                 location.pathname === "/plag" ? "bg-gray-700" : "hover:bg-gray-700"
                             }`}
                         >
@@ -37,7 +42,7 @@ function Sidebar() {
                     <li>
                         <Link
                             to="/profile"
-                            className={`block py-2 px-4 lg:py-4 lg:px-8 text-sm lg:text-xl rounded-md ${
+                            className={`block py-3 px-4 rounded-md text-base font-medium ${
                                 location.pathname === "/profile" ? "bg-gray-700" : "hover:bg-gray-700"
                             }`}
                         >
@@ -47,11 +52,21 @@ function Sidebar() {
                     <li>
                         <Link
                             to="/problems"
-                            className={`block py-2 px-4 lg:py-4 lg:px-8 text-sm lg:text-xl rounded-md ${
+                            className={`block py-3 px-4 rounded-md text-base font-medium ${
                                 location.pathname === "/problems" ? "bg-gray-700" : "hover:bg-gray-700"
                             }`}
                         >
                             PROBLEM INSIGHTS
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            to="/compare"
+                            className={`block py-3 px-4 rounded-md text-base font-medium ${
+                                location.pathname === "/compare" ? "bg-gray-700" : "hover:bg-gray-700"
+                            }`}
+                        >
+                            COMPARE
                         </Link>
                     </li>
                 </ul>

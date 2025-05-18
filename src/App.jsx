@@ -6,6 +6,7 @@ import Profile from "./pages/Profile";
 import ProfileDetails from "./pages/ProfileDetails";
 import Problem from "./pages/Problem";
 import ProblemDetails from "./pages/ProblemDetails";
+import Compare from "./pages/Compare";
 
 function App() {
   return (
@@ -25,11 +26,13 @@ function App() {
             <Route path="/profile/:userHandle" element={<ProfileDetails />} />
             <Route path="/problems" element={<Problem />} />
             <Route path="/problems/:userHandle" element={<ProblemDetails />} />
+            <Route path="/compare" element={<Compare />} />
+
           </Routes>
           {/* Footer */}
           <footer className="py-8 bg-gray-800 mt-auto">
             <div className="container mx-auto text-center text-white">
-              <p>Made By Nihal Rawat with ❤️ and ☕.</p>
+              <p>Made By Harsh Bhanushali.</p>
             </div>
           </footer>
         </div>

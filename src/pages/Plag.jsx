@@ -79,90 +79,175 @@ const Plag = () => {
   };
 
   return (
-    <div className="p-8 bg-white min-h-screen">
-      <h1 className="text-5xl font-extrabold text-center mb-10 text-gray-700">Plagiarism Detection</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-4 mb-8">
-        <label htmlFor="user-handle" className="block text-xl font-medium">Enter Codeforces User Handle:</label>
+    <div className="min-h-screen p-8">
+      {/* Header Section */}
+      <div className="text-center mb-12 animate-fade-in">
+        <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-red-500 to-pink-500 rounded-2xl mb-6 shadow-large">
+          <span className="text-3xl">🔍</span>
+        </div>
+        <h1 className="text-5xl lg:text-6xl font-extrabold mb-4 bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">
+          Plagiarism Detection
+        </h1>
+        <p className="text-lg text-secondary-600 max-w-2xl mx-auto leading-relaxed">
+          Detect potential plagiarism by analyzing skipped contest submissions
+        </p>
+      </div>
 
-        <input
-          type="text"
-          id="user-handle"
-          value={userHandle}
-          onChange={handleInputChange}
-          className="w-[80%] max-w-md text-center px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          placeholder="Example - ilove_sundarKanya"
-        />
-        <button
-          type="submit"
-          disabled={isLoading || !userHandle.trim()}
-          className={`px-6 py-3 rounded-lg shadow transition-transform transform ${
-            isLoading || !userHandle.trim()
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-600 text-white hover:bg-blue-700 hover:scale-105"
-          }`}
-        >
-          Submit
-        </button>
-      </form>
+      {/* Form Section */}
+      <div className="max-w-2xl mx-auto mb-12">
+        <div className="bg-card-gradient rounded-2xl p-8 lg:p-12 shadow-large border border-secondary-200 animate-slide-up">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="space-y-3">
+              <label
+                htmlFor="user-handle"
+                className="block text-lg font-semibold text-secondary-700 text-center"
+              >
+                Enter Codeforces User Handle
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  id="user-handle"
+                  value={userHandle}
+                  onChange={handleInputChange}
+                  className="w-full text-center px-6 py-4 text-lg border-2 border-secondary-200 rounded-xl shadow-soft focus:outline-none focus:ring-4 focus:ring-red-200 focus:border-red-500 transition-all duration-300 bg-white placeholder-secondary-400"
+                  placeholder="Example: tourist, jiangly, Benq"
+                />
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-red-500 to-pink-500 opacity-0 hover:opacity-5 transition-opacity duration-300 pointer-events-none"></div>
+              </div>
+            </div>
 
-      <div className="flex items-center justify-center mt-12">
+            <div className="text-center">
+              <button
+                type="submit"
+                disabled={isLoading || !userHandle.trim()}
+                className={`inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold rounded-xl shadow-large transition-all duration-300 transform ${
+                  isLoading || !userHandle.trim()
+                    ? "bg-secondary-300 text-secondary-500 cursor-not-allowed"
+                    : "bg-gradient-to-r from-red-600 to-pink-600 text-white hover:from-red-700 hover:to-pink-700 hover:scale-105 hover:shadow-glow focus:outline-none focus:ring-4 focus:ring-red-200"
+                }`}
+              >
+                {isLoading ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Analyzing...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Check for Plagiarism</span>
+                    <span className="text-xl">🔍</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      {/* Results Section */}
+      <div className="flex items-center justify-center">
         {isLoading ? (
-          <Loader />
+          <div className="text-center animate-fade-in">
+            <Loader />
+            <p className="mt-4 text-secondary-600 font-medium">Analyzing submissions...</p>
+          </div>
         ) : (
-          <div className="w-full">
+          <div className="w-full max-w-6xl">
             {userNotFound ? (
-              <div className="text-3xl text-center font-bold mb-8 text-gray-700">User not found</div>
+              <div className="bg-card-gradient rounded-2xl p-8 shadow-large border border-red-200 text-center animate-fade-in">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
+                  <span className="text-2xl">❌</span>
+                </div>
+                <h3 className="text-2xl font-bold text-red-600 mb-2">User Not Found</h3>
+                <p className="text-secondary-600">The specified user handle does not exist on Codeforces.</p>
+              </div>
             ) : isGenuine !== null ? (
-              <>
-                <h2 className={`text-3xl text-center font-bold mb-8 ${isGenuine ? "text-green-600" : "text-red-600"}`}>
-                  {isGenuine
-                    ? `${lastUser} is genuine. 😊`
-                    : `${lastUser} has ${cheatedContests.length} Skipped Contests. 🚩`}
-                </h2>
+              <div className="animate-fade-in">
+                {/* Result Header */}
+                <div className={`bg-card-gradient rounded-2xl p-8 shadow-large border mb-8 text-center ${
+                  isGenuine ? "border-green-200" : "border-red-200"
+                }`}>
+                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 ${
+                    isGenuine ? "bg-green-100" : "bg-red-100"
+                  }`}>
+                    <span className="text-2xl">{isGenuine ? "✅" : "🚩"}</span>
+                  </div>
+                  <h2 className={`text-3xl font-bold mb-2 ${isGenuine ? "text-green-600" : "text-red-600"}`}>
+                    {isGenuine
+                      ? `${lastUser} appears genuine`
+                      : `${lastUser} has ${cheatedContests.length} suspicious contest${cheatedContests.length > 1 ? 's' : ''}`}
+                  </h2>
+                  <p className="text-secondary-600">
+                    {isGenuine
+                      ? "No suspicious patterns detected in contest submissions."
+                      : "Found contests where all submissions were skipped, which may indicate plagiarism."}
+                  </p>
+                </div>
+
+                {/* Contest Details Table */}
                 {cheatedContests.length > 0 && (
-                  <div>
-                    <div className="text-xl text-center font-bold mt-12 mb-4">Skipped Contest Details</div>
-                    <table className="table-auto w-full border-collapse border border-gray-300">
-                      <thead>
-                        <tr className="bg-gray-100">
-                          <th className="border border-gray-300 px-4 py-2 text-left">Contest ID</th>
-                          <th className="border border-gray-300 px-4 py-2 text-left">Contest Name</th>
-                          <th className="border border-gray-300 px-4 py-2 text-left sm:block hidden">Skipped Questions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {cheatedContests.map((contest) => (
-                          <tr key={contest.contestId}>
-                            <td className="border border-gray-300 px-4 py-4">
-                              <a
-                                className="font-semibold hover:text-blue-600"
-                                href={`https://codeforces.com/submissions/${lastUser}/contest/${contest.contestId}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {contest.contestId}
-                              </a>
-                            </td>
-                            <td className="border border-gray-300 px-4 py-4">
-                              <a
-                                className="font-semibold hover:text-blue-600"
-                                href={`https://codeforces.com/submissions/${lastUser}/contest/${contest.contestId}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {contest.name}
-                              </a>
-                            </td>
-                            <td className="border border-gray-300 px-4 py-4 sm:block hidden">{contest.skippedProblems}</td>
+                  <div className="bg-card-gradient rounded-2xl p-8 shadow-large border border-secondary-200">
+                    <div className="text-center mb-6">
+                      <h3 className="text-2xl font-bold text-secondary-800 mb-2">Suspicious Contest Details</h3>
+                      <p className="text-secondary-600">Contests where all submissions were skipped</p>
+                    </div>
+
+                    <div className="overflow-x-auto">
+                      <table className="w-full border-collapse">
+                        <thead>
+                          <tr className="bg-secondary-50 border-b-2 border-secondary-200">
+                            <th className="px-6 py-4 text-left font-semibold text-secondary-700">Contest ID</th>
+                            <th className="px-6 py-4 text-left font-semibold text-secondary-700">Contest Name</th>
+                            <th className="px-6 py-4 text-left font-semibold text-secondary-700 hidden sm:table-cell">Skipped Problems</th>
+                            <th className="px-6 py-4 text-center font-semibold text-secondary-700">Action</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody>
+                          {cheatedContests.map((contest, index) => (
+                            <tr
+                              key={contest.contestId}
+                              className={`border-b border-secondary-100 hover:bg-secondary-50 transition-colors duration-200 ${
+                                index % 2 === 0 ? "bg-white" : "bg-secondary-25"
+                              }`}
+                            >
+                              <td className="px-6 py-4 font-mono text-secondary-800 font-semibold">
+                                {contest.contestId}
+                              </td>
+                              <td className="px-6 py-4 text-secondary-800 font-medium">
+                                {contest.name}
+                              </td>
+                              <td className="px-6 py-4 text-secondary-600 hidden sm:table-cell">
+                                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-red-100 text-red-700">
+                                  {contest.skippedProblems} problems
+                                </span>
+                              </td>
+                              <td className="px-6 py-4 text-center">
+                                <a
+                                  href={`https://codeforces.com/submissions/${lastUser}/contest/${contest.contestId}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-600 to-primary-700 text-white text-sm font-semibold rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-300 transform hover:scale-105 shadow-medium hover:shadow-glow"
+                                >
+                                  <span>View</span>
+                                  <span>↗</span>
+                                </a>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 )}
-              </>
+              </div>
             ) : (
-              <div className="text-center text-gray-600">Enter a user handle to check for plagiarism.</div>
+              <div className="bg-card-gradient rounded-2xl p-12 shadow-large border border-secondary-200 text-center animate-fade-in">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-secondary-100 rounded-full mb-4">
+                  <span className="text-2xl">🔍</span>
+                </div>
+                <h3 className="text-xl font-semibold text-secondary-700 mb-2">Ready to Analyze</h3>
+                <p className="text-secondary-600">Enter a user handle above to check for potential plagiarism patterns.</p>
+              </div>
             )}
           </div>
         )}

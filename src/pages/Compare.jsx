@@ -105,67 +105,115 @@ function Compare() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="flex-grow p-4 md:p-6">
-        <h1 className="text-3xl font-bold mb-6 text-center">Compare Two Codeforces Users</h1>
+      <div className="flex-grow p-4 md:p-8">
+        {/* Header Section */}
+        <div className="text-center mb-12 animate-fade-in">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl mb-6 shadow-large">
+            <span className="text-3xl">⚖️</span>
+          </div>
+          <h1 className="text-5xl lg:text-6xl font-extrabold mb-4 bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
+            Compare Users
+          </h1>
+          <p className="text-lg text-secondary-600 max-w-2xl mx-auto leading-relaxed">
+            Compare two Codeforces users side-by-side with detailed analytics and insights
+          </p>
+        </div>
 
-        <div className="flex flex-col md:flex-row justify-center gap-4 mb-6">
-          <input
-            type="text"
-            value={handle1}
-            onChange={(e) => setHandle1(e.target.value)}
-            placeholder="Enter first handle"
-            className="border p-2 rounded w-full md:w-1/3"
-          />
-          <input
-            type="text"
-            value={handle2}
-            onChange={(e) => setHandle2(e.target.value)}
-            placeholder="Enter second handle"
-            className="border p-2 rounded w-full md:w-1/3"
-          />
-          <button
-            onClick={handleCompare}
-            className={`px-4 py-2 rounded text-white ${
-              loading ? "bg-blue-300 cursor-not-allowed" : "bg-blue-500"
-            }`}
-            disabled={loading}
-          >
-            {loading ? "Comparing..." : "Compare"}
-          </button>
+        {/* Input Section */}
+        <div className="bg-card-gradient rounded-2xl p-8 shadow-large border border-secondary-200 mb-8 animate-slide-up">
+          <div className="flex flex-col lg:flex-row justify-center gap-4 items-end">
+            <div className="flex-1 max-w-xs">
+              <label className="block text-sm font-semibold text-secondary-700 mb-2">First User</label>
+              <input
+                type="text"
+                value={handle1}
+                onChange={(e) => setHandle1(e.target.value)}
+                placeholder="Enter first handle"
+                className="w-full px-4 py-3 border-2 border-secondary-200 rounded-xl shadow-soft focus:outline-none focus:ring-4 focus:ring-primary-200 focus:border-primary-500 transition-all duration-300 bg-white placeholder-secondary-400"
+              />
+            </div>
+
+            <div className="flex-shrink-0 text-2xl text-secondary-400 hidden lg:block">
+              VS
+            </div>
+
+            <div className="flex-1 max-w-xs">
+              <label className="block text-sm font-semibold text-secondary-700 mb-2">Second User</label>
+              <input
+                type="text"
+                value={handle2}
+                onChange={(e) => setHandle2(e.target.value)}
+                placeholder="Enter second handle"
+                className="w-full px-4 py-3 border-2 border-secondary-200 rounded-xl shadow-soft focus:outline-none focus:ring-4 focus:ring-primary-200 focus:border-primary-500 transition-all duration-300 bg-white placeholder-secondary-400"
+              />
+            </div>
+
+            <button
+              onClick={handleCompare}
+              disabled={loading || !handle1.trim() || !handle2.trim()}
+              className={`px-8 py-3 rounded-xl font-semibold transition-all duration-300 transform ${
+                loading || !handle1.trim() || !handle2.trim()
+                  ? "bg-secondary-300 text-secondary-500 cursor-not-allowed"
+                  : "bg-gradient-to-r from-primary-600 to-primary-700 text-white hover:from-primary-700 hover:to-primary-800 hover:scale-105 shadow-large hover:shadow-glow"
+              }`}
+            >
+              {loading ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <span>Comparing...</span>
+                </div>
+              ) : (
+                "Compare"
+              )}
+            </button>
+          </div>
         </div>
 
         {loading && (
-          <div className="text-center mb-4 text-lg font-medium text-gray-600">
-            🔄 Please wait... Fetching data...
+          <div className="text-center mb-8 animate-fade-in">
+            <div className="inline-flex items-center gap-3 px-6 py-4 bg-primary-50 border border-primary-200 rounded-xl text-primary-700">
+              <div className="w-5 h-5 border-2 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
+              <span className="font-medium">Please wait... Fetching data...</span>
+            </div>
           </div>
         )}
 
         {handle1 && handle2 && Object.keys(difficultyData1).length > 0 && (
-          <div className={loading ? "opacity-50 pointer-events-none" : ""}>
+          <div className={loading ? "opacity-50 pointer-events-none" : "animate-fade-in"}>
             {/* Account Info Section */}
-            <div className="w-full mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 text-white px-4">
+            <div className="w-full mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
               {[userInfo1, userInfo2].map((user, index) => (
-                <div key={index} className="bg-gray-800 p-6 rounded-lg shadow-md">
-                  <h2 className="text-xl font-bold mb-4 text-center">
-                    {index === 0 ? handle1 : handle2}'s Details
-                  </h2>
-                  <div>
+                <div key={index} className="bg-card-gradient rounded-2xl p-8 shadow-large border border-secondary-200">
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl mb-3 shadow-medium">
+                      <span className="text-xl">👤</span>
+                    </div>
+                    <h2 className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
+                      {index === 0 ? handle1 : handle2}
+                    </h2>
+                    <div className="h-0.5 w-16 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full mx-auto mt-2"></div>
+                  </div>
+
+                  <div className="space-y-3">
                     {[
-                      ["Rating", user.rating],
-                      ["Max Rating", user.maxRating],
-                      ["Rank", user.rank],
-                      ["Max Rank", user.maxRank],
-                      ["Contribution", user.contribution],
-                      ["Friends Count", user.friendOfCount],
-                      ["Organization", user.organization],
-                    ].map(([label, value]) => (
-                      <p
+                      ["Rating", user.rating, "⭐"],
+                      ["Max Rating", user.maxRating, "🏆"],
+                      ["Rank", user.rank, "🎯"],
+                      ["Max Rank", user.maxRank, "👑"],
+                      ["Contribution", user.contribution, "💡"],
+                      ["Friends Count", user.friendOfCount, "👥"],
+                      ["Organization", user.organization, "🏢"],
+                    ].map(([label, value, icon]) => (
+                      <div
                         key={label}
-                        className="flex justify-between py-2 border-b border-gray-600 last:border-0"
+                        className="flex items-center justify-between py-3 px-4 bg-white bg-opacity-60 rounded-xl border border-secondary-100"
                       >
-                        <span className="font-semibold w-40">{label}:</span>
-                        <span>{value || "N/A"}</span>
-                      </p>
+                        <div className="flex items-center gap-3">
+                          <span className="text-lg">{icon}</span>
+                          <span className="font-semibold text-secondary-700">{label}:</span>
+                        </div>
+                        <span className="font-bold text-secondary-800">{value || "N/A"}</span>
+                      </div>
                     ))}
                   </div>
                 </div>
